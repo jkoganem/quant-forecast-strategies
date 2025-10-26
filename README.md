@@ -176,11 +176,13 @@ $$\mathbb{E}[r_t] = \mu \quad \text{(constant mean)}$$
 $$\text{Var}(r_t) = \sigma^2 \quad \text{(constant variance)}$$
 $$\text{Cov}(r_t, r_{t-k}) = \gamma_k \quad \text{(autocorrelation depends only on lag } k\text{)}$$
 
-Most forecasting models assume stationarity. The **Augmented Dickey-Fuller (ADF)** test checks for unit roots (non-stationarity) by testing whether $\phi = 1$ in:
+Most forecasting models assume stationarity. 
+
+The Augmented Dickey-Fuller (ADF) test checks for unit roots (non-stationarity) by testing whether $\phi = 1$ in:
 
 $$\Delta r_t = \alpha + (\phi - 1)r_{t-1} + \sum_{j=1}^p \beta_j \Delta r_{t-j} + \varepsilon_t$$
 
-If $p$-value $< 0.05$, we reject the unit root hypothesis and conclude the series is stationary.
+If p-value < 0.05, we reject the unit root hypothesis and conclude the series is stationary.
 
 ### 2. Forecasting Models
 
@@ -188,11 +190,11 @@ All models produce one-step-ahead forecasts $\hat{r}_{t+1|t}$ using information 
 
 #### Naive Baselines
 
-- **Historical Mean**:
+- Historical Mean:
 
 $$\hat{r}_{t+1|t}^{\text{naive}} = \frac{1}{t}\sum_{s=1}^{t} r_s$$
 
-- **Seasonal Naive (Day-of-Week)**:
+- Seasonal Naive (Day-of-Week):
 
 $$\hat{r}_{t+1|t}^{\text{seasonal}} = r_{t+1-5} \quad \text{(last week's return for same weekday)}$$
 
@@ -200,7 +202,7 @@ These provide simple benchmarks that sophisticated models must beat to justify t
 
 #### GARCH(1,1) for Volatility
 
-The **Generalized Autoregressive Conditional Heteroskedasticity (GARCH)** model captures volatility clustering:
+The Generalized Autoregressive Conditional Heteroskedasticity (GARCH) model captures volatility clustering:
 
 $$r_t = \mu + \sigma_t \varepsilon_t, \quad \varepsilon_t \sim N(0,1), \quad \sigma_t^2 = \omega + \alpha \varepsilon_{t-1}^2 + \beta \sigma_{t-1}^2$$
 
@@ -386,7 +388,7 @@ All outputs are saved to `outputs/`:
 - **Report:** `report.txt` (comprehensive summary)
 - **JSON:** `results_bundle.json` (comprehensive results in JSON format)
 
-## CLI Arguments
+## CLI Flags
 
 | Argument | Type | Default | Description |
 |----------|------|---------|-------------|
