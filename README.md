@@ -188,10 +188,12 @@ All models produce one-step-ahead forecasts $\hat{r}_{t+1|t}$ using information 
 
 #### Naive Baselines
 
-**Historical Mean:**
+- **Historical Mean**:
+
 $$\hat{r}_{t+1|t}^{\text{naive}} = \frac{1}{t}\sum_{s=1}^{t} r_s$$
 
-**Seasonal Naive (Day-of-Week):**
+- **Seasonal Naive (Day-of-Week)**:
+
 $$\hat{r}_{t+1|t}^{\text{seasonal}} = r_{t+1-5} \quad \text{(last week's return for same weekday)}$$
 
 These provide simple benchmarks that sophisticated models must beat to justify their complexity.
@@ -200,8 +202,7 @@ These provide simple benchmarks that sophisticated models must beat to justify t
 
 The **Generalized Autoregressive Conditional Heteroskedasticity (GARCH)** model captures volatility clustering:
 
-$$r_t = \mu + \sigma_t \varepsilon_t, \quad \varepsilon_t \sim N(0,1)$$
-$$\sigma_t^2 = \omega + \alpha \varepsilon_{t-1}^2 + \beta \sigma_{t-1}^2$$
+$$r_t = \mu + \sigma_t \varepsilon_t, \quad \varepsilon_t \sim N(0,1), \quad \sigma_t^2 = \omega + \alpha \varepsilon_{t-1}^2 + \beta \sigma_{t-1}^2$$
 
 where:
 - $\omega > 0$ is the baseline variance
@@ -209,32 +210,34 @@ where:
 - $\beta \geq 0$ captures persistence (GARCH effect)
 - Stationarity requires $\alpha + \beta < 1$
 
-**Interpretation:** Today's volatility depends on yesterday's squared return (shock) and yesterday's volatility (persistence). This captures the empirical fact that volatile periods cluster together.
+*Interpretation*: Today's volatility depends on yesterday's squared return (shock) and yesterday's volatility (persistence). This captures the empirical fact that volatile periods cluster together.
 
 #### SARIMA (Seasonal Autoregressive Integrated Moving Average)
 
-**ARIMA(p,d,q)** combines three components:
-- **AR(p):** Autoregression on past values
-- **I(d):** Differencing to achieve stationarity
-- **MA(q):** Moving average of past errors
+ARIMA(p,d,q) combines three components:
+- AR(p): Autoregression on past values
+- I(d): Differencing to achieve stationarity
+- MA(q): Moving average of past errors
 
 $$\phi(B)(1-B)^d r_t = \theta(B)\varepsilon_t$$
 
 where $B$ is the backshift operator ($Br_t = r_{t-1}$), $\phi(B) = 1 - \phi_1 B - \cdots - \phi_p B^p$, and $\theta(B) = 1 + \theta_1 B + \cdots + \theta_q B^q$.
 
-**SARIMA** adds seasonal terms with period $s$ (e.g., $s=5$ for weekly patterns in daily data):
+SARIMA adds seasonal terms with period $s$ (e.g., $s=5$ for weekly patterns in daily data):
 
 $$\Phi(B^s)\phi(B)(1-B^s)^D(1-B)^d r_t = \Theta(B^s)\theta(B)\varepsilon_t$$
 
 Model orders are selected via grid search minimizing AIC (Akaike Information Criterion).
 
-#### Regularized Regression
+#### Regularization
 
-**Ridge Regression** minimizes:
+Regularized linear regression controls overfitting by penalizing large coefficients.
+
+Ridge Regression minimizes:
 
 $$\min_{\beta} \sum_{t=1}^{T} (r_t - \mathbf{x}_{t-1}^T \boldsymbol{\beta})^2 + \lambda ||\boldsymbol{\beta}||_2^2$$
 
-**Lasso Regression** uses L^1 penalty for feature selection:
+Lasso Regression uses L^1 penalty for feature selection:
 
 $$\min_{\beta} \sum_{t=1}^{T} (r_t - \mathbf{x}_{t-1}^T \boldsymbol{\beta})^2 + \lambda ||\boldsymbol{\beta}||_1$$
 
@@ -248,7 +251,7 @@ The penalty parameter $\lambda$ is chosen via cross-validation to balance fit an
 
 #### XGBoost: Gradient Boosting
 
-**XGBoost** builds an additive ensemble of decision trees:
+XGBoost builds an additive ensemble of decision trees:
 
 $$\hat{r}_t = \sum_{k=1}^{K} \eta \cdot f_k(\mathbf{x}_{t-1})$$
 
@@ -309,10 +312,10 @@ where $V_t$ is the portfolio value. Measures worst-case loss from any historical
 
 #### Forecast Accuracy
 
-- **MSE (Mean Squared Error):** $\frac{1}{T}\sum_{t}(r_t - \hat{r}_t)^2$ - penalizes large errors heavily
-- **MAE (Mean Absolute Error):** $\frac{1}{T}\sum_{t}|r_t - \hat{r}_t|$ - more robust to outliers
-- **R-squared:** $1 - \frac{\sum(r_t - \hat{r}_t)^2}{\sum(r_t - \bar{r})^2}$ - proportion of variance explained
-- **Directional Accuracy:** $\frac{1}{T}\sum_{t} \mathbb{1}(\text{sign}(r_t) = \text{sign}(\hat{r}_t))$ - percent correct direction
+- MSE (Mean Squared Error): $\frac{1}{T}\sum_{t}(r_t - \hat{r}_t)^2$ - penalizes large errors heavily
+- MAE (Mean Absolute Error): $\frac{1}{T}\sum_{t}|r_t - \hat{r}_t|$ - more robust to outliers
+- R-squared: $1 - \frac{\sum(r_t - \hat{r}_t)^2}{\sum(r_t - \bar{r})^2}$ - proportion of variance explained
+- Directional Accuracy: $\frac{1}{T}\sum_{t} \mathbb{1}(\text{sign}(r_t) = \text{sign}(\hat{r}_t))$ - percent correct direction
 
 ### 5. Statistical Diagnostics
 
