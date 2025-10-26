@@ -121,34 +121,34 @@ Performance Metrics (Sharpe, Drawdown, etc.)
 
 ### Forecast Performance
 
-![Variance Forecasts](outputs/forecasts.png)
+![Variance Forecasts](figures/forecasts.png)
 *Figure 1: Return and variance forecasts. Top panel shows 8 models' return predictions vs actual. Bottom panel compares GARCH variance forecasts (pink) against realized 20-day variance (black), demonstrating the model's ability to track volatility dynamics.*
 
-![Model Comparison](outputs/model_compare.png)
+![Model Comparison](figures/model_compare.png)
 *Figure 2: Comparative forecast accuracy across models using MSE, MAE, and directional accuracy metrics. The leaderboard table shows top 5 performers.*
 
 ### Strategy Performance
 
-![Equity Curves](outputs/equity_curves.png)
+![Equity Curves](figures/equity_curves.png)
 *Figure 3: Cumulative returns (top) and drawdowns (bottom) for all trading strategies over the common evaluation period. Volatility-managed strategy (orange) achieves superior risk-adjusted returns with controlled drawdowns. All curves rebased to 1.0 at start of common period for fair comparison.*
 
-![Rolling Performance](outputs/rolling_performance.png)
+![Rolling Performance](figures/rolling_performance.png)
 *Figure 4: 63-day rolling metrics showing evolution of annualized returns, volatility, and Sharpe ratios. Demonstrates strategy adaptation to changing market conditions including the COVID-19 crash and recovery.*
 
 ### Model Diagnostics
 
-![Diagnostics](outputs/diagnostics.png)
+![Diagnostics](figures/diagnostics.png)
 *Figure 5: Statistical tests for model residuals. Left panel shows Ljung-Box test p-values (green = white noise residuals, red = autocorrelation detected). Right table displays detailed statistics - most models pass white noise test (p > 0.05), indicating well-specified models.*
 
-![Residual Diagnostics](outputs/residual_diagnostics.png)
+![Residual Diagnostics](figures/residual_diagnostics.png)
 *Figure 6: Comprehensive residual analysis for top 4 models showing time series plots, autocorrelation functions (ACF), Q-Q plots, and distribution histograms. Ideal residuals are uncorrelated and normally distributed.*
 
 ### Forecast Analysis
 
-![Forecast Errors](outputs/forecast_errors.png)
+![Forecast Errors](figures/forecast_errors.png)
 *Figure 7: Distribution and time series of forecast errors across models. Box plots reveal error spread and outliers, while time series shows temporal patterns in prediction mistakes.*
 
-![Correlation Heatmap](outputs/correlation_heatmap.png)
+![Correlation Heatmap](figures/correlation_heatmap.png)
 *Figure 8: Cross-correlation matrix of model forecasts. High correlations (red) indicate models capture similar patterns; low correlations (blue) suggest complementary information, justifying ensemble approaches.*
 
 ## Mathematical Foundation
